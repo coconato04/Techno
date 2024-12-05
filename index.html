@@ -1,0 +1,468 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Thriftology
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #fff;
+            border-bottom: 1px solid #eaeaea;
+        }
+        header .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        header nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #333;
+        }
+        header nav a:hover {
+            color: #d4a373;
+        }
+        header .search-bar {
+            display: flex;
+            align-items: center;
+        }
+        header .search-bar input {
+            padding: 5px 10px;
+            border: 1px solid #eaeaea;
+            border-radius: 20px;
+            margin-right: 10px;
+        }
+        header .icons a {
+            margin: 0 10px;
+            color: #333;
+        }
+        .hero {
+            position: relative;
+            text-align: center;
+            color: white;
+        }
+        .hero img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+        .hero .hero-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 36px;
+            font-weight: bold;
+        }
+        .section-title {
+            text-align: center;
+            margin: 40px 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .fashion-selection, .top-products, .features, .about-us {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 0 20px;
+        }
+        .fashion-selection img, .top-products img {
+            width: 100%;
+            height: auto;
+        }
+        .fashion-selection .item, .top-products .item {
+            flex: 1 1 calc(25% - 20px);
+            text-align: center;
+        }
+        .fashion-selection .item {
+            position: relative;
+        }
+        .fashion-selection .item .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .top-products .item {
+            border: 1px solid #eaeaea;
+            padding: 10px;
+        }
+        .top-products .item .price {
+            color: #d4a373;
+            font-weight: bold;
+        }
+        .top-products .item .rating {
+            color: #f5c518;
+        }
+        .features .feature, .about-us .about {
+            flex: 1 1 calc(33% - 20px);
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #eaeaea;
+        }
+        .about-us {
+            padding: 40px 20px;
+            background-color: #f9f9f9;
+        }
+        .about-us .about img {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+        }
+        .about-us .about .text {
+            text-align: left;
+        }
+        .about-us .about .text h3 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .about-us .about .text p {
+            margin: 20px 0;
+        }
+        .about-us .about .text .buttons {
+            display: flex;
+            gap: 20px;
+        }
+        .about-us .about .text .buttons a {
+            padding: 10px 20px;
+            text-decoration: none;
+            color: white;
+            background-color: #d4a373;
+            border-radius: 5px;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        footer .footer-section {
+            flex: 1 1 calc(25% - 20px);
+            margin: 20px 0;
+        }
+        footer .footer-section h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        footer .footer-section p, footer .footer-section a {
+            color: white;
+            text-decoration: none;
+        }
+        footer .footer-section a:hover {
+            text-decoration: underline;
+        }
+        footer .footer-section .social-icons a {
+            margin: 0 10px;
+        }
+        footer .footer-bottom {
+            text-align: center;
+            margin-top: 20px;
+            border-top: 1px solid #444;
+            padding-top: 20px;
+        }
+        @media (max-width: 768px) {
+            .fashion-selection .item, .top-products .item, .features .feature, .about-us .about {
+                flex: 1 1 100%;
+            }
+            header nav a {
+                margin: 0 5px;
+            }
+            header .search-bar input {
+                width: 100px;
+            }
+        }
+  </style>
+ </head>
+ <body>
+  <header>
+   <div class="logo">
+    Thriftology
+   </div>
+   <nav>
+    <a href="#">
+     Beranda
+    </a>
+    <a href="#">
+     Produk
+    </a>
+    <a href="#">
+     Kategori
+    </a>
+    <a href="#">
+     Terbaru
+    </a>
+   </nav>
+   <div class="search-bar">
+    <input placeholder="Cari" type="text"/>
+    <div class="icons">
+     <a href="#">
+      <i class="fas fa-shopping-cart">
+      </i>
+     </a>
+     <a href="#">
+      <i class="fas fa-user">
+      </i>
+     </a>
+    </div>
+   </div>
+  </header>
+  <div class="hero">
+   <img alt="Person wearing a brown coat and white shirt sitting on a bench" height="600" src="img/1.jpeg" width="1920"/>
+   <div class="hero-text">
+    Gaya Unik, Harga Terjangkau
+    <br/>
+    Temukan Inspirasi Outfit Anda
+   </div>
+  </div>
+  <div class="section-title">
+   Pilihan Fashion
+  </div>
+  <div class="fashion-selection">
+   <div class="item">
+    <img alt="Woman wearing a denim jacket" height="400" src="https://storage.googleapis.com/a1aa/image/LvDhvB334D79F1FnXcUIwry2cXiyhlPaSebUNUcEMNHfW12TA.jpg" width="400"/>
+    <div class="overlay">
+     WANITA
+    </div>
+   </div>
+   <div class="item">
+    <img alt="Person holding a black handbag" height="400" src="https://storage.googleapis.com/a1aa/image/PVu6WNla2GbRItB7J5UtjPevYsmzAzY71WmvQMOffQ2stqtnA.jpg" width="400"/>
+    <div class="overlay">
+     AKSESORIS
+    </div>
+   </div>
+   <div class="item">
+    <img alt="Man wearing a black hoodie" height="400" src="https://storage.googleapis.com/a1aa/image/Cki8gibsxPLeAqafyXsEDIVnEiflpSRPCe1KfAtZEtuS3q2eE.jpg" width="400"/>
+    <div class="overlay">
+     PRIA
+    </div>
+   </div>
+  </div>
+  <div class="section-title">
+   Produk Terlaris
+  </div>
+  <div class="top-products">
+   <div class="item">
+    <img alt="Leather Jacket" height="200" src="img/9.jpg" width="200"/>
+    <div>
+     Leather Jacket
+    </div>
+    <div class="price">
+     Rp50.000
+    </div>
+    <div class="rating">
+     ⭐⭐⭐⭐⭐ 100 terjual
+    </div>
+   </div>
+   <div class="item">
+    <img alt="ACW Men's White Sneakers" height="200" src="https://storage.googleapis.com/a1aa/image/YfijvkeGeIINlJEyG9ZilynVX3zUrEgbXyfTfvoLN4ID4q2eE.jpg" width="200"/>
+    <div>
+     ACW Men's White Sneakers
+    </div>
+    <div class="price">
+     Rp50.000
+    </div>
+    <div class="rating">
+     ⭐⭐⭐⭐ 100 terjual
+    </div>
+   </div>
+   <div class="item">
+    <img alt="Women's Black Sweatpants" height="200" src="https://storage.googleapis.com/a1aa/image/SccevgYVoa0rU6t2HlHnlI2llsNketE3Wu1BlEpgv9HzW12TA.jpg" width="200"/>
+    <div>
+     Women's Black Sweatpants
+    </div>
+    <div class="price">
+     Rp50.000
+    </div>
+    <div class="rating">
+     ⭐⭐⭐⭐ 100 terjual
+    </div>
+   </div>
+   <div class="item">
+    <img alt="Men's Brown Sweatshirt" height="200" src="https://storage.googleapis.com/a1aa/image/6WdlG874mCriNB8qeqqcfOrNFdckHjzQBkyWSUlg5Xd9W12TA.jpg" width="200"/>
+    <div>
+     Men's Brown Sweatshirt
+    </div>
+    <div class="price">
+     Rp50.000
+    </div>
+    <div class="rating">
+     ⭐⭐⭐⭐ 100 terjual
+    </div>
+   </div>
+   <div class="item">
+    <img alt="Converse Black Bag" height="200" src="https://storage.googleapis.com/a1aa/image/TXG6td7LxrrMGJbIaR2VjWmHxF78elTWrvjeErmefzTTbVbPB.jpg" width="200"/>
+    <div>
+     Converse Black Bag
+    </div>
+    <div class="price">
+     Rp50.000
+    </div>
+    <div class="rating">
+     ⭐⭐⭐⭐ 100 terjual
+    </div>
+   </div>
+  </div>
+  <div class="section-title">
+   Keunggulan Kami
+  </div>
+  <div class="features">
+   <div class="feature">
+    <i class="fas fa-star">
+    </i>
+    <h4>
+     Kualitas Premium
+    </h4>
+    <p>
+     Meskipun barang bekas, tetapi barang-barang yang dijual telah melalui proses seleksi yang ketat untuk memastikan kualitasnya tetap terjaga
+    </p>
+   </div>
+   <div class="feature">
+    <i class="fas fa-th">
+    </i>
+    <h4>
+     Beragam Pilihan
+    </h4>
+    <p>
+     Menyediakan beragam pilihan produk mulai dari kaos, jaket, celana, sepatu, hingga aksesoris seperti tas dan topi
+    </p>
+   </div>
+   <div class="feature">
+    <i class="fas fa-handshake">
+    </i>
+    <h4>
+     Fitur Nego Harga
+    </h4>
+    <p>
+     Memiliki fitur negosiasi harga dengan penjual, memberi kesempatan untuk mendapatkan penawaran terbaik sesuai dengan budget anda
+    </p>
+   </div>
+   <div class="feature">
+    <i class="fas fa-lock">
+    </i>
+    <h4>
+     Pembayaran yang Aman
+    </h4>
+    <p>
+     Menyediakan sistem pembayaran yang aman dan terpercaya untuk menyelesaikan transaksi
+    </p>
+   </div>
+  </div>
+  <div class="about-us">
+   <div class="about">
+    <img alt="Store interior with various items on display" height="400" src="img/6.jpg" width="400"/>
+    <div class="text">
+     <h3>
+      Tentang Kami
+     </h3>
+     <p>
+      Thriftology adalah destinasi untuk para pecinta thrift yang mencari fashion branded dengan harga terjangkau. Dengan komitmen kami untuk menyediakan pengalaman belanja yang memuaskan, Thriftology menawarkan koleksi pakaian dan aksesoris yang berkualitas dari berbagai sumber terpercaya. Kami berdedikasi untuk mempromosikan fashion lingkungan dengan mengurangi limbah tekstil dan memperkenalkan kembali barang-barang bekas ke dalam lingkungan ekonomi. Melalui Thriftology, kami menghubungkan pembeli dengan barang-barang berkualitas yang telah melewati proses seleksi kualitas barang untuk memastikan kepuasan pelanggan.
+     </p>
+     <div class="buttons">
+      <a href="#">
+       Dapatkan produk
+      </a>
+      <a href="#">
+       Hubungi Kami
+      </a>
+     </div>
+    </div>
+   </div>
+  </div>
+  <footer>
+   <div class="footer-section">
+    <h4>
+     Thriftology
+    </h4>
+    <p>
+     WhatsApp: +62 859 9999 999
+    </p>
+    <p>
+     Email: thriftology@email.com
+    </p>
+    <p>
+     Address: Street Block B Number 88, Jakarta, Indonesia
+    </p>
+   </div>
+   <div class="footer-section">
+    <h4>
+     Menu
+    </h4>
+    <a href="#">
+     Beranda
+    </a>
+    <br/>
+    <a href="#">
+     Produk
+    </a>
+    <br/>
+    <a href="#">
+     Kategori
+    </a>
+    <br/>
+    <a href="#">
+     Terbaru
+    </a>
+   </div>
+   <div class="footer-section">
+    <h4>
+     Dapatkan Bantuan
+    </h4>
+    <a href="#">
+     Layanan Pelanggan
+    </a>
+    <br/>
+    <a href="#">
+     FAQ
+    </a>
+    <br/>
+    <a href="#">
+     Pengembalian Barang &amp; Batas
+    </a>
+    <br/>
+    <a href="#">
+     Kebijakan Privasi
+    </a>
+   </div>
+   <div class="footer-section">
+    <h4>
+     Akun
+    </h4>
+    <a href="#">
+     Akun Saya
+    </a>
+    <br/>
+    <a href="#">
+     Pesanan Saya
+    </a>
+   </div>
+   <div class="footer-bottom">
+    <p>
+     Copyright 2023 by Thriftology. All Rights Reserved
+    </p>
+   </div>
+  </footer>
+ </body>
+</html>
